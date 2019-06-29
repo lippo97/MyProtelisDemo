@@ -11,14 +11,9 @@ public class DeviceCapabilities extends AbstractExecutionContext {
 
     private MyDeviceUID uid;
 
-    public DeviceCapabilities(final int uid) {
-        super(new SimpleExecutionEnvironment(), new MyNetworkManager());
+    public DeviceCapabilities(final int uid, final NetworkManager ntmgr) {
+        super(new SimpleExecutionEnvironment(), ntmgr);
         this.uid = new MyDeviceUIDImpl(uid);
-    }
-
-    // TODO: Find some workaoround.
-    public MyNetworkManager accessNetworkManager() {
-        return (MyNetworkManager) super.getNetworkManager();
     }
 
     public void announce(String msg) {
@@ -31,7 +26,7 @@ public class DeviceCapabilities extends AbstractExecutionContext {
 
     @Override
     protected AbstractExecutionContext instance() {
-        return new DeviceCapabilities(this.uid.getUID());
+        return new DeviceCapabilities(this.uid.getUID(), getNetworkManager());
     }
 
     @Override

@@ -27,17 +27,5 @@ public class MyNetwork {
         devices.remove(device);
     }
 
-    public void runCycle() {
-        Map<DeviceUID, Map<CodePath, Object>> messages =
-                devices.stream()
-                       .collect(Collectors.toMap(
-                               e -> e.getDeviceUID(),
-                               e -> e.accessNetworkManager().getToSend()
-                       ));
-
-        messages.forEach((uid, msg) -> {
-            devices.forEach(d->d.accessNetworkManager().setNeighborState(uid, msg));
-        });
-
-    }
+    public void runCycle() { }
 }

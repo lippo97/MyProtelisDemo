@@ -43,17 +43,12 @@ public class HelloProtelis {
             g.addEdge(devices.get(i - 1), devices.get(i));
         }
         g.addEdge(devices.get(devices.size()-1), devices.get(0));
-        // Let the devices execute 3 timestoSend
+        // Let the devices know the network topology
+        devices.forEach(d -> d.setNetwork(g));
+        // Let the devices execute 3 times
         for (int i = 0; i < 3; i++) {
             devices.forEach(Device::runCycle);
-            devices.forEach(d -> {
-                // Retrieve uid and message to send
-                DeviceUID uid = d.getDeviceCapabilities().getDeviceUID();
-                Map<CodePath, Object> toSend = d.getDeviceCapabilities().accessNetworkManager().getToSend();
-                // Retrieve current device neighbors and set their state
-                Set<Device> neighbors = Graphs.neighborSetOf(g, d);
-                neighbors.forEach(n -> n.getDeviceCapabilities().accessNetworkManager().setNeighborState(uid, toSend));
-            });
+            devices.forEach(Device::sendMessages);
         }
     }
 
