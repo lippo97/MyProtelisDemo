@@ -16,6 +16,11 @@ public class DeviceCapabilities extends AbstractExecutionContext {
         this.uid = new MyDeviceUIDImpl(uid);
     }
 
+    // TODO: Find some workaoround.
+    public MyNetworkManager accessNetworkManager() {
+        return (MyNetworkManager) super.getNetworkManager();
+    }
+
     public void announce(String msg) {
         System.out.println(msg);
     }
@@ -23,7 +28,6 @@ public class DeviceCapabilities extends AbstractExecutionContext {
     public void announce(int a) {
         System.out.println(a);
     }
-
 
     @Override
     protected AbstractExecutionContext instance() {

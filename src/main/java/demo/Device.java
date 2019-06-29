@@ -6,9 +6,10 @@ import org.protelis.vm.ProtelisVM;
 public class Device {
 
     private final ProtelisVM vm;
-    private final DeviceCapabilities deviceCapabilities = new DeviceCapabilities(8); //TODO: Magic number
+    private final DeviceCapabilities deviceCapabilities;
 
-    public Device(ProtelisProgram program) {
+    public Device(ProtelisProgram program, int uid) {
+        deviceCapabilities = new DeviceCapabilities(uid);
         this.vm = new ProtelisVM(program, deviceCapabilities);
     }
 
