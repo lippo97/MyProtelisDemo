@@ -44,11 +44,11 @@ public class HelloProtelis {
         }
         g.addEdge(devices.get(devices.size()-1), devices.get(0));
         // Let the devices know the network topology
-        devices.forEach(d -> d.setNetwork(g));
+            devices.forEach(d -> d.setNetwork(g));
         // Let the devices execute 3 times
         for (int i = 0; i < 3; i++) {
             devices.forEach(Device::runCycle);
-            devices.forEach(Device::sendMessages);
+            //devices.forEach(Device::sendMessages);
         }
     }
 
